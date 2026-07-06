@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1d2b33">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>APIH · What we'd build for you</title>
+<style>
+  :root{
+    --ink:#1d2b33; --orange:#d9651f; --teal:#2f6f7a; --gold:#c9a24b;
+    --mut:#6c7a82; --line:#e7ded2; --panel:#fcfaf6; --soft:#8a7a64; --bg:#ffffff;
+    --green:#3d7a4f; --plum:#8a5a96;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Helvetica Neue',Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;font-size:16px;}
+  h1,h2,h3,h4{font-family:Georgia,'Times New Roman',serif;font-weight:700;line-height:1.14;letter-spacing:-.3px;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px;}
+  .o{color:var(--orange);} .t{color:var(--teal);} .g{color:var(--gold);}
+
+  header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:680px;margin:0 auto;padding:0 20px;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .logo{width:32px;height:32px;border-radius:8px;background:var(--orange);color:#fff;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;}
+  .brand b{font-size:17px;letter-spacing:.4px;}
+  .brand small{display:block;font-size:8px;letter-spacing:1.4px;color:var(--mut);text-transform:uppercase;margin-top:1px;}
+  .backbtn{display:none;font-size:14px;font-weight:600;color:var(--mut);background:none;border:1px solid var(--line);border-radius:7px;padding:7px 13px;cursor:pointer;font-family:inherit;}
+  .backbtn:active{background:var(--panel);}
+  body.inview .backbtn{display:block;}
+
+  .private{background:var(--ink);color:#cfd9dd;font-size:11px;letter-spacing:1px;text-transform:uppercase;text-align:center;padding:7px 12px;}
+  .private b{color:var(--gold);}
+
+  /* HUB */
+  .hub-hero{padding:36px 0 24px;background:linear-gradient(165deg,#ffffff 0%,#fbf7f1 100%);}
+  .kicker{font-size:11px;letter-spacing:2.4px;text-transform:uppercase;color:var(--orange);font-weight:700;}
+  .hub-hero h1{font-size:32px;margin:12px 0 12px;}
+  .hub-hero p{font-size:16px;color:#3a4a52;}
+  .hub-hero .tagline{font-family:Georgia,serif;font-style:italic;color:var(--orange);font-size:16px;margin-top:14px;}
+
+  /* stakes strip */
+  .stakes{padding:18px 0 6px;}
+  .stakegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
+  .stake{border:1px solid var(--line);border-radius:12px;padding:14px 12px;background:#fff;text-align:center;}
+  .stake b{display:block;font-family:Georgia,serif;font-size:20px;color:var(--ink);}
+  .stake span{font-size:10.5px;color:var(--mut);line-height:1.4;display:block;margin-top:4px;}
+  .stakesrc{font-size:10px;color:var(--soft);text-align:center;margin-top:8px;}
+
+  .vlist{padding:22px 0 8px;}
+  .vlist .lab, .sec .lab{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:13px;}
+  .vcard{display:flex;align-items:center;gap:15px;border:1px solid var(--line);border-radius:14px;padding:17px;background:#fff;margin-bottom:11px;cursor:pointer;transition:transform .12s;}
+  .vcard:active{transform:scale(.985);}
+  .vcard .ic{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:21px;flex:none;}
+  .vcard h3{font-size:17.5px;margin-bottom:2px;}
+  .vcard p{font-size:12.5px;color:var(--mut);}
+  .vcard .arr{margin-left:auto;color:var(--line);font-size:20px;flex:none;}
+  .vcard.flag{border-color:var(--gold);box-shadow:0 4px 18px rgba(201,162,75,.14);}
+  .flagchip{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;background:#f3ead6;color:#7a6326;border-radius:4px;padding:3px 7px;display:inline-block;margin-bottom:3px;}
+  .ic.ph{background:#f0e6f2;} .ic.fu{background:#fbe6d6;} .ic.mi{background:#e8e4dc;}
+  .ic.ag{background:#e4efe2;} .ic.re{background:#f3ead6;} .ic.yo{background:#e0eef0;}
+
+  .startgrid{padding:14px 0 8px;}
+  .startbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:21px;margin-bottom:12px;}
+  .startbox .pk{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--soft);font-weight:700;}
+  .startbox h4{font-size:19px;margin:6px 0 8px;}
+  .startbox p{font-size:14px;color:#45535b;}
+  .qcard{cursor:pointer;border-left:4px solid var(--teal);}
+  .qcard:active{transform:scale(.99);}
+
+  /* offer ladder */
+  .ladder{list-style:none;margin-top:14px;}
+  .ladder li{display:flex;gap:13px;padding:13px 0;border-bottom:1px dashed var(--line);}
+  .ladder li:last-child{border-bottom:none;}
+  .ln{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-family:Georgia,serif;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;}
+  .ladder b{font-family:Georgia,serif;font-size:15.5px;display:block;}
+  .ladder span{font-size:13px;color:#45535b;}
+  .price{color:var(--orange);font-weight:700;}
+
+  /* audio player */
+  .player{display:flex;align-items:center;gap:12px;margin-top:14px;}
+  .playbtn{width:46px;height:46px;border-radius:50%;border:none;background:var(--orange);color:#fff;font-size:17px;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center;}
+  .playbtn:active{background:#c0571a;}
+  .ptrack{flex:1;height:8px;background:var(--line);border-radius:4px;cursor:pointer;overflow:hidden;}
+  .pfill{height:100%;width:0%;background:var(--orange);border-radius:4px;transition:width .2s linear;}
+  .ptime{font-size:12px;color:var(--mut);font-variant-numeric:tabular-nums;flex:none;min-width:38px;text-align:right;}
+
+  /* VERTICAL VIEWS */
+  .view{display:none;}
+  .view.active{display:block;animation:fadein .25s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  @media(prefers-reduced-motion:reduce){.view.active{animation:none;}}
+  .vhero{padding:30px 0 22px;}
+  .vhero .vk{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;}
+  .vhero h1{font-size:27px;margin:10px 0 10px;}
+  .vhero p{font-size:15.5px;color:#3a4a52;}
+  .sec{padding:20px 0;}
+  .feat{list-style:none;}
+  .feat li{padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:#2b3940;display:flex;gap:10px;}
+  .feat li:last-child{border-bottom:none;}
+  .dot{width:8px;height:8px;border-radius:50%;margin-top:7px;flex:none;}
+
+  /* industry pattern strip */
+  .patterns{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;}
+  .patterns .pk{font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:11px;}
+  .prow{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px dashed var(--line);}
+  .prow:last-of-type{border-bottom:none;}
+  .prow b{font-family:Georgia,serif;font-size:19px;color:var(--ink);min-width:96px;flex:none;}
+  .prow span{font-size:12.5px;color:#45535b;}
+  .pnote{font-size:10.5px;color:var(--soft);margin-top:10px;line-height:1.5;}
+
+  /* digest card */
+  .briefcard{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 6px 24px rgba(29,43,51,.08);}
+  .briefcard .bhead{background:var(--ink);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .briefcard .bhead .bt{font-family:Georgia,serif;font-size:15px;}
+  .briefcard .bhead .bd{font-size:10.5px;color:#9fb0b8;letter-spacing:1px;text-transform:uppercase;}
+  .samplechip{background:var(--gold);color:#3d3315;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;padding:4px 9px;border-radius:4px;flex:none;}
+  .bbody{padding:16px 18px;}
+  .brow{padding:11px 0;border-bottom:1px dashed var(--line);}
+  .brow:last-child{border-bottom:none;}
+  .brow .bl{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--soft);font-weight:700;}
+  .brow .bv{font-size:14px;color:#2b3940;margin-top:3px;}
+  .brow .bv b{font-family:Georgia,serif;}
+  .conf{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:4px;margin-top:4px;background:#f3ead6;color:#7a6326;}
+  .redact{background:#dcd6cc;color:transparent;border-radius:3px;user-select:none;}
+  .bfoot{background:var(--panel);border-top:1px solid var(--line);padding:11px 18px;font-size:11px;color:var(--soft);}
+  .approve{margin-top:8px;border:1px solid var(--teal);color:var(--teal);background:#fff;border-radius:7px;padding:8px 14px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;}
+  .approve.done{background:var(--green);border-color:var(--green);color:#fff;}
+
+  /* offer strip */
+  .offer{background:var(--ink);border-radius:16px;color:#e8eef0;padding:24px 22px;margin:6px 0 8px;}
+  .offer .n{font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .offer h4{color:#fff;font-size:20px;margin:7px 0 8px;}
+  .offer p{font-size:13.5px;color:#aebcc4;}
+  .offer .btn{display:block;text-align:center;background:var(--orange);color:#fff;border-radius:9px;padding:14px;font-weight:600;font-size:15px;margin-top:16px;}
+  .offer .btn:active{background:#c0571a;}
+  .offer .btn2{display:block;text-align:center;border:1px solid #3a4a52;color:#cfd9dd;border-radius:9px;padding:12px;font-weight:600;font-size:14px;margin-top:9px;}
+
+  /* discovery form */
+  .qsec{padding:16px 0 4px;}
+  .qsec .qh{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--soft);font-weight:700;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;}
+  .q{margin-bottom:18px;}
+  .q label.ql{display:block;font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+  .q .qhint{font-size:12px;color:var(--mut);margin-bottom:7px;}
+  .q input[type=text], .q textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:12px;font-size:15px;font-family:inherit;background:var(--panel);color:var(--ink);}
+  .q textarea{min-height:74px;resize:vertical;}
+  .q input:focus, .q textarea:focus{outline:2px solid var(--teal);outline-offset:1px;background:#fff;}
+  .ticks{display:flex;flex-direction:column;gap:8px;}
+  .tick{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:9px;padding:11px 12px;font-size:14px;background:#fff;cursor:pointer;}
+  .tick input{margin-top:3px;accent-color:var(--teal);width:16px;height:16px;flex:none;}
+  .tick:has(input:checked){border-color:var(--teal);background:#f0f6f7;}
+  .radios{display:flex;gap:8px;flex-wrap:wrap;}
+  .radios .tick{flex:1;justify-content:center;text-align:center;min-width:80px;}
+  .sendrow{padding:10px 0 26px;}
+  .sendbtn{display:block;width:100%;text-align:center;background:var(--teal);color:#fff;border:none;border-radius:10px;padding:15px;font-weight:600;font-size:15.5px;cursor:pointer;font-family:inherit;}
+  .sendbtn:active{background:#255a63;}
+  .sendbtn.alt{background:#fff;color:var(--ink);border:1px solid var(--line);margin-top:9px;}
+  .qnote{font-size:11.5px;color:var(--soft);margin-top:12px;line-height:1.55;}
+
+  .stackchips{display:flex;flex-wrap:wrap;gap:8px;}
+  .stackchips span{border:1px solid var(--line);background:#fff;border-radius:7px;padding:7px 12px;font-size:12.5px;color:#3a4a52;font-weight:600;}
+  .ratecard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;}
+  .rrow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 17px;border-bottom:1px solid var(--line);}
+  .rrow:last-child{border-bottom:none;}
+  .rrow .rl b{font-family:Georgia,serif;font-size:15px;display:block;}
+  .rrow .rl span{font-size:12px;color:var(--mut);}
+  .rrow .rp{font-family:Georgia,serif;font-size:17px;color:var(--orange);white-space:nowrap;font-weight:700;}
+  .rrow.hd{background:var(--ink);}
+  .rrow.hd .rl b{color:#fff;} .rrow.hd .rl span{color:#9fb0b8;} .rrow.hd .rp{color:var(--gold);}
+  details.faq{border:1px solid var(--line);border-radius:11px;background:#fff;margin-bottom:9px;overflow:hidden;}
+  details.faq summary{list-style:none;cursor:pointer;padding:14px 16px;font-weight:600;font-size:14.5px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq summary::after{content:'+';font-family:Georgia,serif;font-size:19px;color:var(--orange);flex:none;}
+  details.faq[open] summary::after{content:'\2212';}
+  details.faq .fa{padding:0 16px 15px;font-size:13.5px;color:#45535b;line-height:1.6;}
+  footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:11px;color:var(--mut);line-height:1.6;}
+  footer .ftag{font-family:Georgia,serif;font-style:italic;color:var(--orange);font-size:13px;margin-bottom:10px;}
+
+  @media(min-width:700px){ .hub-hero h1{font-size:40px;} .vhero h1{font-size:33px;} }
+</style>
+</head>
+<body>
+
+<div class="private"><b>Private demo</b> · prepared for this conversation · not public marketing</div>
+
+<header>
+  <div class="bar">
+    <a class="brand" href="#" onclick="go('hub');return false;">
+      <div class="logo">A</div>
+      <div><b>AP<span class="o">I</span>H</b><small>Australian Property &amp; Investment Hub</small></div>
+    </a>
+    <button class="backbtn" onclick="go('hub')">← All industries</button>
+  </div>
+</header>
+
+<!-- ============ HUB ============ -->
+<div class="view active" id="hub">
+  <section class="hub-hero"><div class="wrap">
+    <div class="kicker">Show, don't tell</div>
+    <h1>What we'd build <span class="o">for you.</span></h1>
+    <p>Pick your industry. See the exact deliverable you'd receive, the honest industry numbers behind it, and how the first move costs you nothing.</p>
+    <div class="tagline">Seventy-two hours before the world reacts.</div>
+  </div></section>
+
+  <section class="stakes"><div class="wrap">
+    <div class="stakegrid">
+      <div class="stake"><b>$1000s</b><span>lost yearly by the average AU SME to late payments alone</span></div>
+      <div class="stake"><b>10–15 hrs</b><span>per week of owner time going to admin a system could do</span></div>
+      <div class="stake"><b>$4.50 : $1</b><span>reported return per dollar on customer-watch automation</span></div>
+    </div>
+    <div class="stakesrc">Third-party industry research (2025–26) — patterns, not our promises. Your result is scoped in the pilot.</div>
+  </div></section>
+
+  <section class="vlist"><div class="wrap">
+    <div class="lab">Choose your world</div>
+    <div class="vcard flag" onclick="go('pharm')"><div class="ic ph">⚕</div><div><span class="flagchip">Most requested</span><h3>Pharmacy &amp; Franchise</h3><p>20–100+ stores, one pair of eyes across all of them</p></div><div class="arr">›</div></div>
+    <div class="vcard" onclick="go('fuel')"><div class="ic fu">⛽</div><div><h3>Fuel &amp; Multi-Site</h3><p>Price right across every site. See the shock coming.</p></div><div class="arr">›</div></div>
+    <div class="vcard" onclick="go('mine')"><div class="ic mi">⛏</div><div><h3>Mining &amp; Resources</h3><p>The shift happens offshore — know before it lands</p></div><div class="arr">›</div></div>
+    <div class="vcard" onclick="go('agri')"><div class="ic ag">🌾</div><div><h3>Agriculture at Scale</h3><p>The season from orbit, the paperwork automated</p></div><div class="arr">›</div></div>
+    <div class="vcard" onclick="go('prop')"><div class="ic re">⌂</div><div><h3>Property &amp; Mortgage</h3><p>Every lead answered. Every deal moved forward.</p></div><div class="arr">›</div></div>
+    <div class="vcard" onclick="go('yours')"><div class="ic yo">✳</div><div><h3>Something else?</h3><p>Name the headache — the model fits any real operation</p></div><div class="arr">›</div></div>
+  </div></section>
+
+  <section class="startgrid"><div class="wrap">
+    <div class="startbox">
+      <div class="pk">Hear it · two minutes</div>
+      <h4>The voice brief.</h4>
+      <p>What we do and why the first move costs nothing — in plain words, for the drive between meetings.</p>
+      <div class="player">
+        <button class="playbtn" id="playbtn" onclick="togglePlay()" aria-label="Play voice brief">▶</button>
+        <div class="ptrack" onclick="seek(event)"><div class="pfill" id="pfill"></div></div>
+        <span class="ptime" id="ptime">0:00</span>
+      </div>
+      <audio id="vb" src="voice-brief.mp3" preload="metadata"></audio>
+    </div>
+
+    <div class="startbox">
+      <div class="pk">The path in — every number stated up front</div>
+      <h4>Free look. Refundable pilot. Then piece by piece.</h4>
+      <ul class="ladder">
+        <li><div class="ln">1</div><div><b>Free first move</b><span>Intelligence: one sourced brief in 24–48h, free. Automation: a workflow walkthrough at your premises — we tell you on the spot what's worth automating and what isn't.</span></div></li>
+        <li><div class="ln">2</div><div><b>Pilot — <span class="price">A$4,500, fully refundable</span></b><span>A first working result on your real data by day 10; your decision window runs to day 30. Refundable in full up to day 30 — the only binding commitment. Locked in writing.</span></div></li>
+        <li><div class="ln">3</div><div><b>Build — paid on delivery, owned by you</b><span>Pick the agents that matter. Each priced per piece, milestone-locked, yours to keep. Run-costs pass through at cost — never marked up. Clean break clause, always.</span></div></li>
+      </ul>
+    </div>
+
+    <div class="startbox qcard" style="border-left-color:var(--orange);" onclick="go('pricing')">
+      <div class="pk">Every number, up front</div>
+      <h4>Pricing &amp; straight answers &rarr;</h4>
+      <p>What it costs all-in, how the refund works, who owns what, and what happens if it breaks &mdash; the questions owners actually ask.</p>
+    </div>
+
+    <div class="startbox qcard" style="border-left-color:var(--gold);" onclick="go('brief')">
+      <div class="pk">The complete picture · 3-minute read</div>
+      <h4>The full brief →</h4>
+      <p>Both lines, how it works end-to-end, the agent menu, and the three-stage model — everything on one page.</p>
+    </div>
+
+    <div class="startbox qcard" onclick="go('discover')">
+      <div class="pk">15 minutes, on your phone</div>
+      <h4>Tell us where it hurts →</h4>
+      <p>A short discovery form — answer what fits, skip what doesn't. It lands straight with Harry on WhatsApp, held in confidence under NDA.</p>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ PHARMACY — FLAGSHIP ============ -->
+<div class="view" id="pharm">
+  <section class="vhero"><div class="wrap">
+    <div class="vk" style="color:var(--plum)">Pharmacy &amp; Franchise Groups</div>
+    <h1>Twenty-plus stores. One pair of eyes across all of them.</h1>
+    <p>Stock, reorders, overdue invoices and quiet account drift — multiplied across every site, with no single view that catches it before it costs you. The leaks are small individually and large together. And the group only runs when you're in the room.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">What the industry numbers say</div>
+    <div class="patterns">
+      <div class="pk">Third-party results in comparable businesses — not our clients</div>
+      <div class="prow"><b>21–28 → 7–10</b><span>days: payment cycles compressed by intelligent, graduated invoice chasing</span></div>
+      <div class="prow"><b>−75%</b><span>invoice processing time, with up to 90% fewer manual entry errors</span></div>
+      <div class="prow"><b>998 hrs/yr</b><span>saved by one Australian practice automating document handling and routine workflows</span></div>
+      <div class="pnote">Industry-pattern data from published Australian and global case studies (2025–26). They show the ceiling, not a promise — your Year-1 result depends on your data, your systems and your team, and is scoped honestly in the pilot.</div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">Agents we'd put on the systems you already run</div>
+    <ul class="feat">
+      <li><span class="dot" style="background:var(--plum)"></span><span><b>Reorder &amp; stock watch</b> — ordering drafted per site against real sales, on the right date, every time. You approve; it executes.</span></li>
+      <li><span class="dot" style="background:var(--plum)"></span><span><b>Cash-flow watch</b> — graduated invoice chasing that knows who opened the email and when a personal call beats a reminder. Crunches flagged 30 days out.</span></li>
+      <li><span class="dot" style="background:var(--plum)"></span><span><b>Account drift</b> — flags stores and B2B accounts whose ordering has quietly dropped below their 12-week rhythm — before they leave, not after.</span></li>
+      <li><span class="dot" style="background:var(--plum)"></span><span><b>Group daily digest</b> — one morning view ranking what needs your attention first across every franchise. Everything else stays off your desk.</span></li>
+      <li><span class="dot" style="background:var(--plum)"></span><span><b>Built on your stack</b> — we read from and write back to the systems you already pay for. Nothing replaced, nothing new to learn.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">What lands in your inbox at 6 am — try it</div>
+    <div class="briefcard">
+      <div class="bhead"><div><div class="bt">Group Morning Digest</div><div class="bd">All sites · <span class="today"></span></div></div><span class="samplechip">Sample · Illustrative</span></div>
+      <div class="bbody">
+        <div class="brow"><div class="bl">Needs you first</div><div class="bv"><b>Store <span class="redact">██████</span></b> — reorder gap on 3 fast-movers against this week's sales. Supplier order drafted and priced.</div>
+          <button class="approve" onclick="approveIt(this)">Tap to approve order</button></div>
+        <div class="brow"><div class="bl">Cash-flow</div><div class="bv">4 invoices &gt;30 days across 2 sites, total <span class="redact">$██,███</span>. Chaser #2 queued for 9 am — one account flagged for a personal call instead.</div></div>
+        <div class="brow"><div class="bl">Account drift</div><div class="bv">1 B2B account ordering 40% below its 12-week rhythm. Suggested owner call this week — talking points drafted.</div></div>
+        <div class="brow"><div class="bl">All clear</div><div class="bv">Remaining sites within normal range. Nothing else needs you today.</div></div>
+      </div>
+      <div class="bfoot">Illustrative sample — the structure of the real deliverable, not real client data. Built on your stack, tuned to your group, in the pilot.</div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">The first move — risk on us</div>
+      <h4>A fully refundable pilot on your real data.</h4>
+      <p>We shadow how your group runs and put a first working result live inside a locked, written window. If it isn't worth it, every dollar comes back. What we build after that is yours — priced per piece, no lock-in, run-costs at cost.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ FUEL ============ -->
+<div class="view" id="fuel">
+  <section class="vhero"><div class="wrap">
+    <div class="vk o">Fuel &amp; Multi-Site Operators</div>
+    <h1>Price right across every site. See the shock coming.</h1>
+    <p>Two things move your margin: getting price right across every site, and seeing a supply shock before it lands on your invoices. Both are near-impossible by hand at a hundred sites.</p>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="lab">Both lines, one relationship</div>
+    <ul class="feat">
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Pricing &amp; site ops agents</b> — price moves accurate and fast across every site, against your rules; fewer margin leaks from lag and manual error</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Stock &amp; supply ordering</b> — automated against real throughput, exceptions flagged daily instead of chased by hand</span></li>
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>Corridor watch</b> — chokepoint, refining and shipping disruption read early, mapped to your specific footprint</span></li>
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>Diesel-cost direction</b> — an indicative, sourced read on the weeks ahead — before it's on the wires</span></li>
+    </ul>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="lab">What a brief looks like — sample</div>
+    <div class="briefcard">
+      <div class="bhead"><div><div class="bt">Corridor Exposure Brief</div><div class="bd">Requested Mon · Delivered Wed</div></div><span class="samplechip">Sample · Illustrative</span></div>
+      <div class="bbody">
+        <div class="brow"><div class="bl">Your question</div><div class="bv">"A refinery outage is being reported upstream of our supply — what does it mean for diesel cost, and which of our sites feel it first?"</div></div>
+        <div class="brow"><div class="bl">The read</div><div class="bv">Disruption is real but partially offset by <span class="redact">████████████</span>; indicative pressure on landed diesel cost is <b>upward over 2–4 weeks</b>, concentrated on routes supplied via <span class="redact">██████████</span>.</div></div>
+        <div class="brow"><div class="bl">Exposure map</div><div class="bv">7 of your sites sit on the affected corridor; 3 have alternative supply within contract terms.</div></div>
+        <div class="brow"><div class="bl">Confidence</div><div class="bv"><span class="conf">Moderate · sourced · 6 primary sources</span></div></div>
+      </div>
+      <div class="bfoot">Illustrative sample — insight, never prediction. Surface indicators and sourced reads, never a guarantee.</div>
+    </div>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">The first move — free</div>
+      <h4>Name your sharpest exposure. First brief is on us.</h4>
+      <p>One question, plain words, three lines is enough. A sourced, decision-ready brief back in 24–48 hours — free, so you judge the value before anything else.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ MINING ============ -->
+<div class="view" id="mine">
+  <section class="vhero"><div class="wrap">
+    <div class="vk" style="color:#5a6b5e">Miners, Explorers &amp; Resource Holders</div>
+    <h1>The shift happens offshore. It hits you first.</h1>
+    <p>A policy move, an export control, or an offtake shift on the other side of the corridor can reset your position overnight — and the ops grind never stops underneath it.</p>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="lab">Watch the exposure, automate the grind</div>
+    <ul class="feat">
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>Export-control &amp; offtake watch</b> — which of your exposures a foreign shift hits, and the corridor read on timing</span></li>
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>Satellite baseline</b> — eyes on the physical asset and its surrounds; surface indicators, never ore assay</span></li>
+      <li><span class="dot" style="background:#5a6b5e"></span><span><b>Procurement &amp; supplier agents</b> — admin handled, exceptions flagged rather than chased</span></li>
+      <li><span class="dot" style="background:#5a6b5e"></span><span><b>Compliance &amp; cash-flow watch</b> — reporting kept current, overdue accounts watched across the operation</span></li>
+    </ul>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="lab">What a brief looks like — sample</div>
+    <div class="briefcard">
+      <div class="bhead"><div><div class="bt">Exposure Brief · Critical Minerals</div><div class="bd">Requested Tue · Delivered Thu</div></div><span class="samplechip">Sample · Illustrative</span></div>
+      <div class="bbody">
+        <div class="brow"><div class="bl">Your question</div><div class="bv">"An export-quota change has been announced offshore for <span class="redact">████████</span> — does it touch our position, and when?"</div></div>
+        <div class="brow"><div class="bl">The read</div><div class="bv">The quota shift bites your offtake pathway via <span class="redact">██████████</span>, not your direct product. Indicative timing: pressure builds over <b>one to two quarters</b>, with the near-term signal in contract renegotiations, not spot price.</div></div>
+        <div class="brow"><div class="bl">What to watch</div><div class="bv">Three named indicators, checked weekly — the early tells that the read is strengthening or fading.</div></div>
+        <div class="brow"><div class="bl">Confidence</div><div class="bv"><span class="conf">Moderate · sourced · corridor-checked</span></div></div>
+      </div>
+      <div class="bfoot">Illustrative sample — insight, never prediction. Satellite surfaces surface indicators; it does not assay ore or find deposits.</div>
+    </div>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">The first move — free</div>
+      <h4>One exposure. One free brief. Judge it yourself.</h4>
+      <p>Name the mineral, the counterparty, the policy risk — whatever would hurt most. A sourced brief in 24–48 hours, free, before any commitment.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ AGRI ============ -->
+<div class="view" id="agri">
+  <section class="vhero"><div class="wrap">
+    <div class="vk" style="color:var(--green)">Large Holdings &amp; Grower Groups</div>
+    <h1>Thousands of hectares. One decision brief, one running farm.</h1>
+    <p>Scale brings two problems at once: you can't see every paddock, and you can't chase every supplier order, invoice and grower by hand. This covers both.</p>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="lab">The season from orbit, the paperwork automated</div>
+    <ul class="feat">
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>Seasonal satellite read</b> — crop vigour, moisture stress, change-over-time across your holdings, flagged for inspection</span></li>
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>Market context fused in</b> — so the read ties to a dollar, not just a map. A brief a manager or lender can act on</span></li>
+      <li><span class="dot" style="background:var(--green)"></span><span><b>Supplier ordering agents</b> — daily ordering automated from real sales; only what's needed, when it's needed</span></li>
+      <li><span class="dot" style="background:var(--green)"></span><span><b>Invoice &amp; AP chasing</b> — cash kept moving, grower-group coordination in one place</span></li>
+    </ul>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="lab">What a brief looks like — sample</div>
+    <div class="briefcard">
+      <div class="bhead"><div><div class="bt">Season Read · Holdings Brief</div><div class="bd">Monthly · plus event-triggered</div></div><span class="samplechip">Sample · Illustrative</span></div>
+      <div class="bbody">
+        <div class="brow"><div class="bl">Change since last read</div><div class="bv">Moisture-stress signal rising across the <span class="redact">████████</span> blocks — 3 zones flagged for ground inspection this week, ranked by severity.</div></div>
+        <div class="brow"><div class="bl">Market context</div><div class="bv">Forward price signal on your primary crop is <span class="redact">██████</span>; stress read and price read together suggest the decision worth reviewing is <b>timing, not volume</b>.</div></div>
+        <div class="brow"><div class="bl">Operations</div><div class="bv">Supplier orders auto-drafted for the fortnight; 2 grower invoices past terms, chasers queued.</div></div>
+        <div class="brow"><div class="bl">Confidence</div><div class="bv"><span class="conf">Surface indicators · flagged for inspection</span></div></div>
+      </div>
+      <div class="bfoot">Illustrative sample — surface indicators, never a guaranteed diagnosis. Ground-truth before acting.</div>
+    </div>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">The first move — free or refundable</div>
+      <h4>One free season read, or a refundable ops pilot.</h4>
+      <p>Start with whichever pain is louder — the paddocks you can't see, or the paperwork that eats the week. Prove one, then add the other.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ PROPERTY ============ -->
+<div class="view" id="prop">
+  <section class="vhero"><div class="wrap">
+    <div class="vk g">Property &amp; Mortgage Businesses</div>
+    <h1>Every lead answered. Every deal moved forward.</h1>
+    <p>In property and mortgage, money leaks where leads go unanswered, follow-ups slip, and deals stall in a pipeline no one is actively working. Agents on the funnel fix exactly that.</p>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="lab">Agents that work the funnel for you</div>
+    <ul class="feat">
+      <li><span class="dot" style="background:var(--gold)"></span><span><b>Lead capture &amp; routing</b> — no enquiry missed, including the ones that land at 11 pm, on public holidays, on sick days</span></li>
+      <li><span class="dot" style="background:var(--gold)"></span><span><b>Follow-up sequences</b> — client comms that happen on time, every time, in your voice</span></li>
+      <li><span class="dot" style="background:var(--gold)"></span><span><b>Pipeline intelligence</b> — slipping deals flagged, patterns surfaced before they cost you</span></li>
+      <li><span class="dot" style="background:var(--gold)"></span><span><b>Document hand-offs</b> — the between-people delays that stall settlements, automated</span></li>
+    </ul>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="lab">What lands in your inbox — try it</div>
+    <div class="briefcard">
+      <div class="bhead"><div><div class="bt">Pipeline Morning Digest</div><div class="bd">Daily · <span class="today"></span></div></div><span class="samplechip">Sample · Illustrative</span></div>
+      <div class="bbody">
+        <div class="brow"><div class="bl">Overnight</div><div class="bv">3 new enquiries captured after hours — all acknowledged within 4 minutes, routed, first follow-up already scheduled.</div></div>
+        <div class="brow"><div class="bl">Slipping</div><div class="bv"><b>Deal <span class="redact">██████</span></b> — no client contact in 9 days at contract-review stage. Suggested action drafted for your approval.</div>
+          <button class="approve" onclick="approveIt(this)">Tap to approve action</button></div>
+        <div class="brow"><div class="bl">Waiting on documents</div><div class="bv">2 files blocked on third parties; polite chasers sent, escalation flagged if silent by Thursday.</div></div>
+        <div class="brow"><div class="bl">All clear</div><div class="bv">Rest of pipeline within normal rhythm. Nothing else needs you today.</div></div>
+      </div>
+      <div class="bfoot">Illustrative sample — structure of the real deliverable, not real client data. Built on your CRM in the pilot.</div>
+    </div>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">The first move — risk on us</div>
+      <h4>A refundable pilot on your real pipeline.</h4>
+      <p>Harry captures how your business runs; a first working result goes live on your actual pipeline inside a locked, written window. If it isn't worth it, every dollar comes back.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ YOURS ============ -->
+<div class="view" id="yours">
+  <section class="vhero"><div class="wrap">
+    <div class="vk t">Your Industry</div>
+    <h1>Real operation, real workload? The model fits.</h1>
+    <p>The patterns are the same everywhere — admin a system could do, invoices chased by hand, customers drifting quietly, leads going cold, and outside forces you can't synthesise in time. What changes is your question.</p>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="lab">Two questions decide where we start</div>
+    <ul class="feat">
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Inside:</b> if you took two weeks off tomorrow, would the business grow, hold, or stall? Whatever stalls it is what we automate first.</span></li>
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>Outside:</b> name the one asset, route, season or counterparty whose disruption would hurt most. That's the first free brief.</span></li>
+    </ul>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">One conversation decides</div>
+      <h4>Tell Harry the headache, in plain words.</h4>
+      <p>Free first insight if it's intelligence; a fully refundable pilot if it's automation. You owe nothing until you've seen the value yourself.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ THE FULL BRIEF ============ -->
+<div class="view" id="brief">
+  <section class="vhero"><div class="wrap">
+    <div class="vk g">Services &amp; Solutions · The Complete Picture</div>
+    <h1>Two ways APIH buys back your edge and your time.</h1>
+    <p>We watch the exposures that move your position — minerals, seasons, fuel, supply — and hand back a decision before it becomes the headline. And we automate the operations that eat your week, so the business runs without living in your inbox. One partner, two lines, built around you.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">The two pains, in owners' own words</div>
+    <ul class="feat">
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>The exposure problem</b> — "too much data, not enough decision." Feeds and dashboards everywhere, and still no clear answer when something moves. By the time it's in the news, it has already cost you.</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>The operations problem</b> — "if I take two weeks off, the whole thing stalls." Hours lost to admin a system could do; invoices chased by hand; customers quietly drifting away.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">Line one · Intelligence — how it works</div>
+    <div class="patterns">
+      <div class="pk">No software to learn · one question in, one brief back</div>
+      <div class="prow"><b>01 Name it</b><span>One exposure, in plain words. Three lines is enough.</span></div>
+      <div class="prow"><b>02 Review</b><span>Satellite signal, several independent reasoning engines, and 25 years of corridor knowledge — pulled into one read.</span></div>
+      <div class="prow"><b>03 Verify</b><span>Cross-checked against primary sources before anything goes out.</span></div>
+      <div class="prow"><b>04 Deliver</b><span>A short, sourced, plain-English brief with a calibrated confidence — in 24–48 hours.</span></div>
+      <div class="pnote">Consultancies take weeks and price like it. One named exposure becomes a decision-ready answer inside two working days. Insight, never prediction.</div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">Line two · Automation — the agent menu</div>
+    <ul class="feat">
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Customer watch</b> — flags customers whose ordering has gone quiet, before they leave</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Reorder &amp; supply</b> — ordering automated against real sales, on the right date, every time</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Cash-flow watch</b> — intelligent invoice chasing, crunches flagged early</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Lead capture &amp; routing</b> — no enquiry missed, follow-up on time, every time</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Pipeline intelligence</b> — slipping deals flagged, patterns surfaced</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Pricing &amp; site ops</b> — accurate, responsive pricing across many sites, against your rules</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>System integration</b> — the tools you already run, connected, so staff stop re-keying</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>AI visibility</b> — read correctly by AI search; email that lands in the inbox, not spam</span></li>
+    </ul>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">Built on the systems you already pay for</div>
+    <div class="stackchips">
+      <span>Xero</span><span>MYOB</span><span>Cliniko</span><span>ServiceM8</span><span>simPRO</span><span>Salesforce</span><span>HubSpot</span><span>Shopify</span><span>LEAP</span><span>Power Diary</span><span>Your POS</span><span>Custom systems</span>
+    </div>
+    <div class="pnote" style="margin-top:10px;">We never replace your tools &mdash; we add the brain on top. Agents read from and write back to your existing stack.</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">The model — risk on us, not you</div>
+    <div class="patterns">
+      <div class="pk">No upfront lump sums · stop at any stage and keep what's built</div>
+      <div class="prow"><b>Stage 0</b><span><b>Pilot — fully refundable.</b> We shadow your business and put a first working result live on your real data. The only binding commitment.</span></div>
+      <div class="prow"><b>Stage 1</b><span><b>Build — paid on delivery.</b> Pick the agents your business needs; each milestone-locked, integrated with your tools, owned by you.</span></div>
+      <div class="prow"><b>Stage 2</b><span><b>Ongoing — tuned &amp; watched.</b> A fractional operations brain, month to month, with a clean break clause.</span></div>
+      <div class="pnote">No client outcomes or ROI are guaranteed. Monthly run-costs (software / AI credits) pass through at cost — never marked up. Scope is set during the pilot, around your data and your team.</div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">Start here · one conversation, both lines</div>
+      <h4>Start with one thing. Free or refundable.</h4>
+      <p>If it's intelligence — name your sharpest exposure, one sourced answer comes back free. If it's automation — a fully refundable pilot, risk on us. One conversation with Harry decides where you begin.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ PRICING & FAQ ============ -->
+<div class="view" id="pricing">
+  <section class="vhero"><div class="wrap">
+    <div class="vk o">Pricing &amp; Straight Answers</div>
+    <h1>Every number public. No upgrade traps.</h1>
+    <p>What it costs, how the refund works, and the questions owners actually ask &mdash; answered before you have to ask them. All prices in AUD, including GST. Final scope is set jointly during the pilot, around your business.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">The rate card &mdash; automation line</div>
+    <div class="ratecard">
+      <div class="rrow hd"><div class="rl"><b>Stage 0 &middot; Pilot</b><span>First working result by day 10 &middot; your decision window to day 30</span></div><div class="rp">A$4,500 &middot; refundable</div></div>
+      <div class="rrow"><div class="rl"><b>Agents &middot; per piece</b><span>Milestone-locked &mdash; if an agent isn't delivered, you don't pay for it</span></div><div class="rp">A$3,000 each</div></div>
+      <div class="rrow"><div class="rl"><b>Ongoing &middot; full</b><span>Continuous tuning, quarterly strategy review, model swaps when new AI ships</span></div><div class="rp">A$3,500 / mo</div></div>
+      <div class="rrow"><div class="rl"><b>Ongoing &middot; lite</b><span>Reduced scope agreed at signing &middot; same 3-month break clause</span></div><div class="rp">A$1,750 / mo</div></div>
+      <div class="rrow"><div class="rl"><b>Intelligence briefs</b><span>First insight free &middot; ongoing coverage scoped per engagement</span></div><div class="rp">First one free</div></div>
+    </div>
+    <div class="pnote" style="margin-top:10px;">Monthly run-costs (AI credits, hosting, third-party software your agents use) pass through to you at cost &mdash; never marked up. Scoped and quoted during the pilot, before any commitment beyond the refundable A$4,500.</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">The questions owners actually ask</div>
+    <details class="faq"><summary>If I stop, what do I keep?</summary><div class="fa">Everything built to that point. Agents are owned by you &mdash; code, configuration, strategy. Stop at the end of any stage and keep what's built. Clean break clause on the ongoing tier, always.</div></details>
+    <details class="faq"><summary>How does the refund actually work?</summary><div class="fa">The pilot is A$4,500, refundable in full up to day 30. A first working result lands by day 10; you then have until day 30 to decide &mdash; continue, or take every dollar back. The decision window is yours, in writing.</div></details>
+    <details class="faq"><summary>What do I pay monthly on top?</summary><div class="fa">Only the third-party run-costs your agents need &mdash; AI credits, hosting, software subscriptions they connect to. These hit your accounts directly at cost, never marked up. An indicative figure is scoped during the pilot so there are no surprises.</div></details>
+    <details class="faq"><summary>What about my data and my customers?</summary><div class="fa">Held in strict confidence under mutual NDA &mdash; your customers, suppliers, numbers and network stay between us. Agents run on your systems, on your accounts. Nothing leaves your control.</div></details>
+    <details class="faq"><summary>What if my staff won't use it?</summary><div class="fa">Agents are built around how your team already works &mdash; same tools, same screens, nothing new to learn. Adoption is designed in during the pilot, on your real workflows, with your real people. If the team can't live with it by day 30, refund.</div></details>
+    <details class="faq"><summary>Is any result guaranteed?</summary><div class="fa">No &mdash; and be wary of anyone who says yes. The only contractual commitment is the refundable pilot. Industry case studies show what's been achieved in comparable businesses; your Year-1 result depends on your data, your systems and your team, and is scoped honestly during the pilot.</div></details>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">Still simplest</div>
+      <h4>One conversation. Tell Harry the headache.</h4>
+      <p>Specific beats general &mdash; "I lose four hours every Friday on invoicing" beats "I want to use AI more." You'll get a straight answer on whether it's a fit, and at least one idea you can use either way.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry &middot; +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp &mdash; fastest path</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ DISCOVERY FORM ============ -->
+<div class="view" id="discover">
+  <section class="vhero"><div class="wrap">
+    <div class="vk t">Client Discovery · Held in Confidence</div>
+    <h1>The more you tell us, the more we save you.</h1>
+    <p>Answer what's relevant, skip the rest — the blanks you leave are as useful as the ones you fill. When you're done, it sends straight to Harry on WhatsApp or email. Nothing is stored on this page.</p>
+  </div></section>
+
+  <div class="wrap">
+    <div class="qsec"><div class="qh">1 · Your business today</div>
+      <div class="q"><label class="ql" for="q_name">Your name, role and business</label>
+        <input type="text" id="q_name" placeholder="e.g. Sam Tran · Owner · Tran Group"></div>
+      <div class="q"><label class="ql" for="q_scale">What does the business do, and at what scale?</label>
+        <div class="qhint">Sites, stores, hectares, staff, rough revenue band — approximate is fine.</div>
+        <textarea id="q_scale"></textarea></div>
+      <div class="q"><label class="ql">Which best describes you? Tick all that apply.</label>
+        <div class="ticks" id="q_type">
+          <label class="tick"><input type="checkbox" value="Pharmacy / multi-franchise group">Pharmacy / multi-franchise group</label>
+          <label class="tick"><input type="checkbox" value="Agriculture — large holdings or grower group">Agriculture — large holdings or grower group</label>
+          <label class="tick"><input type="checkbox" value="Fuel / petrol — multi-site, freight or logistics">Fuel / petrol — multi-site, freight or logistics</label>
+          <label class="tick"><input type="checkbox" value="Mining / resources — explorer or producer">Mining / resources — explorer or producer</label>
+          <label class="tick"><input type="checkbox" value="Property & mortgage / investment">Property &amp; mortgage / investment</label>
+          <label class="tick"><input type="checkbox" value="Something else">Something else (describe above)</label>
+        </div></div>
+    </div>
+
+    <div class="qsec"><div class="qh">2 · Run your operations — what eats your week</div>
+      <div class="q"><label class="ql" for="q_hours">Hours a week you or your team spend on admin a system could do?</label>
+        <input type="text" id="q_hours" placeholder="e.g. 10–15 hours"></div>
+      <div class="q"><label class="ql">Where does the time and money actually leak?</label>
+        <div class="ticks" id="q_leaks">
+          <label class="tick"><input type="checkbox" value="Overdue invoices / chasing payment">Overdue invoices / chasing payment</label>
+          <label class="tick"><input type="checkbox" value="Re-keying the same data into 2+ systems">Re-keying the same data into two or more systems</label>
+          <label class="tick"><input type="checkbox" value="Reorder / stock / supplier ordering by hand">Reorder / stock / supplier ordering done by hand</label>
+          <label class="tick"><input type="checkbox" value="Customers going quiet unnoticed">Customers going quiet without anyone noticing</label>
+          <label class="tick"><input type="checkbox" value="Leads not answered fast enough">Leads or enquiries not answered fast enough</label>
+          <label class="tick"><input type="checkbox" value="Pricing / quotes slow or inconsistent">Pricing / quotes slow or inconsistent across sites</label>
+        </div></div>
+      <div class="q"><label class="ql" for="q_systems">Which systems do you already run?</label>
+        <div class="qhint">Xero / MYOB, a CRM, dispensary or POS software, Shopify, custom — so we automate on your stack, not a new one.</div>
+        <input type="text" id="q_systems"></div>
+      <div class="q"><label class="ql">If you took a two-week holiday tomorrow, the business would…</label>
+        <div class="radios" id="q_holiday">
+          <label class="tick"><input type="radio" name="hol" value="Grow">Grow</label>
+          <label class="tick"><input type="radio" name="hol" value="Hold">Hold</label>
+          <label class="tick"><input type="radio" name="hol" value="Stall">Stall</label>
+        </div></div>
+    </div>
+
+    <div class="qsec"><div class="qh">3 · Watch your exposure — the outside forces</div>
+      <div class="q"><label class="ql" for="q_exposure">The single asset, route, commodity, season or counterparty whose disruption would hurt most?</label>
+        <div class="qhint">A named mine, a mineral, a shipping lane, your growing season, a key supplier, a fuel corridor. Skip if it doesn't apply.</div>
+        <textarea id="q_exposure"></textarea></div>
+      <div class="q"><label class="ql" for="q_decision">Is there a decision coming up that better outside information would help you make?</label>
+        <textarea id="q_decision"></textarea></div>
+    </div>
+
+    <div class="qsec"><div class="qh">4 · The one thing</div>
+      <div class="q"><label class="ql" for="q_first">In one sentence — the one thing you'd most want fixed, answered or watched first.</label>
+        <div class="qhint">That's where we begin: a free first insight if it's intelligence, a refundable pilot if it's automation.</div>
+        <textarea id="q_first"></textarea></div>
+      <div class="q"><label class="ql" for="q_contact">Best way and time to reach you</label>
+        <input type="text" id="q_contact" placeholder="e.g. WhatsApp, weekday mornings"></div>
+    </div>
+
+    <div class="sendrow">
+      <button class="sendbtn" onclick="sendForm('wa')">Send to Harry on WhatsApp</button>
+      <button class="sendbtn alt" onclick="sendForm('mail')">Send by email instead</button>
+      <div class="qnote">Held in 100% confidence under mutual NDA. Your customers, suppliers, numbers and network stay between us. This page stores nothing — your answers travel only in the message you send. Intelligence is insight, never prediction; automation runs on a fully refundable pilot. APIH provides neither financial nor legal advice.</div>
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <div class="ftag">Insight, never prediction.</div>
+  All sample deliverables and industry figures on this page are illustrative or drawn from third-party published research — they are not APIH client results, outcomes or guarantees. Intelligence is insight, never prediction — sourced and calibrated, never a guarantee. Earth observation surfaces surface indicators; it does not assay ore, find deposits, or diagnose crops directly. Automation runs on a fully refundable pilot — the only binding commitment; no ROI is guaranteed and run-costs pass through at cost. APIH provides research, educational and business-automation services only — not financial product, credit or legal advice; nothing here considers your objectives, financial situation or needs. Seek independent licensed advice before any financial decision. Delivered in partnership with a specialist Australian intelligence &amp; automation provider. © 2026 APIH · Australian Property &amp; Investment Hub · Sydney NSW · Harry Singh, Principal · +61&nbsp;405&nbsp;179&nbsp;440
+</div></footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.body.classList.toggle('inview', id!=='hub');
+  window.scrollTo({top:0,behavior:'instant'});
+  if(history.pushState) history.pushState({v:id}, '', '#'+id);
+}
+window.addEventListener('popstate', e=>{
+  const id = (e.state && e.state.v) || (location.hash||'#hub').slice(1);
+  const el = document.getElementById(id);
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  (el||document.getElementById('hub')).classList.add('active');
+  document.body.classList.toggle('inview', id!=='hub' && !!el);
+});
+if(location.hash && document.getElementById(location.hash.slice(1))) go(location.hash.slice(1));
+
+// live date stamp on digests — makes the sample feel like this morning's
+const today = new Date().toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short'});
+document.querySelectorAll('.today').forEach(el=>el.textContent=today);
+
+// tap-to-approve interaction
+function approveIt(btn){
+  btn.classList.add('done');
+  btn.textContent='Approved ✓ — that is the whole job';
+  btn.disabled=true;
+}
+
+// voice brief player
+const vb = document.getElementById('vb'), pfill = document.getElementById('pfill'),
+      ptime = document.getElementById('ptime'), playbtn = document.getElementById('playbtn');
+function fmt(s){ s=Math.floor(s||0); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+function togglePlay(){ if(vb.paused){ vb.play(); playbtn.textContent='❚❚'; } else { vb.pause(); playbtn.textContent='▶'; } }
+function seek(e){ const r=e.currentTarget.getBoundingClientRect(); vb.currentTime=((e.clientX-r.left)/r.width)*(vb.duration||0); }
+vb.addEventListener('timeupdate', ()=>{ if(vb.duration){ pfill.style.width=(vb.currentTime/vb.duration*100)+'%'; ptime.textContent=fmt(vb.duration-vb.currentTime); }});
+vb.addEventListener('loadedmetadata', ()=>{ ptime.textContent=fmt(vb.duration); });
+vb.addEventListener('ended', ()=>{ playbtn.textContent='▶'; pfill.style.width='0%'; ptime.textContent=fmt(vb.duration); });
+
+// discovery form → WhatsApp / email
+function collect(){
+  const val = id => (document.getElementById(id)?.value || '').trim();
+  const ticks = id => [...document.querySelectorAll('#'+id+' input:checked')].map(i=>i.value).join(', ');
+  const hol = document.querySelector('#q_holiday input:checked')?.value || '';
+  const L = [];
+  const add=(k,v)=>{ if(v) L.push(k+': '+v); };
+  add('Name/role/business', val('q_name'));
+  add('Scale', val('q_scale'));
+  add('Type', ticks('q_type'));
+  add('Admin hrs/week', val('q_hours'));
+  add('Where it leaks', ticks('q_leaks'));
+  add('Systems', val('q_systems'));
+  add('Two weeks off, business would', hol);
+  add('Sharpest exposure', val('q_exposure'));
+  add('Decision coming up', val('q_decision'));
+  add('FIRST PRIORITY', val('q_first'));
+  add('Best contact', val('q_contact'));
+  return 'APIH Discovery Brief\n' + '—'.repeat(20) + '\n' + (L.length? L.join('\n') : '(no answers filled)');
+}
+function sendForm(via){
+  const msg = collect();
+  if(msg.includes('(no answers filled)') && !confirm('Nothing filled in yet — send anyway?')) return;
+  if(via==='wa'){
+    location.href = 'https://wa.me/61405179440?text=' + encodeURIComponent(msg);
+  } else {
+    location.href = 'mailto:harry@apih.com.au?subject=' + encodeURIComponent('APIH Discovery Brief') + '&body=' + encodeURIComponent(msg);
+  }
+}
+
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
