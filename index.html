@@ -160,6 +160,24 @@
   .sendbtn.alt{background:#fff;color:var(--ink);border:1px solid var(--line);margin-top:9px;}
   .qnote{font-size:11.5px;color:var(--soft);margin-top:12px;line-height:1.55;}
 
+  .hub-hero.dark{background:linear-gradient(170deg,#1d2b33 0%,#24343d 100%);padding:42px 0 30px;}
+  .hub-hero.dark .kicker{color:var(--gold);}
+  .hub-hero.dark h1{color:#fff;}
+  .hub-hero.dark p{color:#b8c5cb;}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+  .badge{border:1px solid #3a4a52;color:#d9e2e6;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;border-radius:6px;padding:7px 11px;}
+  .badge b{color:var(--gold);}
+  .qstrip{padding:22px 0 6px;}
+  .qq{border:1px solid var(--line);border-left:4px solid var(--gold);background:#fff;border-radius:0 11px 11px 0;padding:13px 15px;margin-bottom:9px;font-family:Georgia,serif;font-size:14.5px;color:#2b3940;font-style:italic;}
+  .qq small{display:block;font-style:normal;font-family:'Helvetica Neue',Arial,sans-serif;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--soft);font-weight:700;margin-top:5px;}
+  .archgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px;}
+  .eng{border:1px solid var(--line);border-radius:12px;padding:14px 12px;background:#fff;text-align:center;}
+  .eng .en{font-family:Georgia,serif;font-size:19px;color:var(--teal);}
+  .eng b{display:block;font-size:12px;margin-top:3px;}
+  .eng span{font-size:10.5px;color:var(--mut);display:block;margin-top:3px;line-height:1.45;}
+  .layers{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 14px;}
+  .layers .ly{font-size:11.5px;font-weight:700;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:7px;padding:7px 11px;}
+  .layers .la{color:var(--gold);font-family:Georgia,serif;font-size:15px;}
   .linecard{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;margin-bottom:14px;cursor:pointer;box-shadow:0 4px 18px rgba(29,43,51,.06);transition:transform .12s;}
   .linecard:active{transform:scale(.985);}
   .lc-head{color:#fff;padding:14px 18px;}
@@ -231,23 +249,36 @@
 
 <!-- ============ HUB ============ -->
 <div class="view active" id="hub">
-  <section class="hub-hero"><div class="wrap">
-    <div class="kicker">APIH does two things</div>
-    <h1>We watch what moves you.<br>We run what drains <span class="o">you.</span></h1>
-    <p>One partner, two engines — decision intelligence on the outside forces, AI agents on the inside grind. Your first move costs nothing either way.</p>
-    <div class="tagline">Seventy-two hours before the world reacts.</div>
+  <section class="hub-hero dark"><div class="wrap">
+    <div class="kicker">APIH · Australian Property &amp; Investment Hub</div>
+    <h1>We watch what moves you.<br>We run what drains <span class="g">you.</span></h1>
+    <p>Intelligence on the outside forces. Agents on the inside grind. One partner, and your first move costs nothing either way.</p>
+    <div class="badges">
+      <span class="badge"><b>72 hours</b> before the world reacts</span>
+      <span class="badge"><b>3 engines</b> · 4 layers</span>
+      <span class="badge">Owned by <b>you</b></span>
+      <span class="badge">First move <b>free</b></span>
+    </div>
+  </div></section>
+
+  <section class="qstrip"><div class="wrap">
+    <div class="lab">Sound familiar? These are the questions people bring us</div>
+    <div class="qq">"A quota change just landed offshore — does it touch my position, and when?"<small>→ Intelligence &amp; Insight · sourced brief in 24–72h</small></div>
+    <div class="qq">"Why did Store 14's ordering quietly drop 40% — and who was watching?"<small>→ Agents &amp; Automation · account-drift watch</small></div>
+    <div class="qq">"If I take two weeks off, the whole thing stalls."<small>→ Agents &amp; Automation · the morning digest runs it</small></div>
+    <div class="qq">"By the time the diesel shock was in the news, it was already in my invoices."<small>→ Intelligence &amp; Insight · corridor watch</small></div>
   </div></section>
 
   <section class="vlist"><div class="wrap">
     <div class="linecard" onclick="go('watch')">
-      <div class="lc-head" style="background:var(--teal);"><span class="lc-n">Line One</span><h3>Watch your exposure</h3></div>
+      <div class="lc-head" style="background:var(--teal);"><span class="lc-n">Line One · Intelligence &amp; Insight</span><h3>Watch your exposure</h3></div>
       <div class="lc-body">
         <p>A mineral, a route, a season, a policy shift — name it, and a sourced decision brief comes back in 24–72 hours. Satellite signal, multi-engine review, 25 years of corridor knowledge.</p>
-        <div class="lc-foot"><b class="t">First insight free</b><span class="lc-go">See how it works ›</span></div>
+        <div class="lc-foot"><b class="t">3 engines · 4 layers · first insight free</b><span class="lc-go">How it works ›</span></div>
       </div>
     </div>
     <div class="linecard" onclick="go('run')">
-      <div class="lc-head" style="background:var(--orange);"><span class="lc-n">Line Two</span><h3>Run your operations</h3></div>
+      <div class="lc-head" style="background:var(--orange);"><span class="lc-n">Line Two · Agents &amp; Automation</span><h3>Run your operations</h3></div>
       <div class="lc-body">
         <p>Custom AI agents on the systems you already run — invoices chased, reorders drafted, leads answered, quiet customers flagged. Owned by you, no lock-in.</p>
         <div class="lc-foot"><b class="o">Pilot A$4,500 · fully refundable</b><span class="lc-go">Agents &amp; pricing ›</span></div>
@@ -310,9 +341,24 @@
 <!-- ============ LINE ONE · WATCH ============ -->
 <div class="view" id="watch">
   <section class="vhero"><div class="wrap">
-    <div class="vk t">Line One · Decision Intelligence</div>
+    <div class="vk t">Line One · Intelligence &amp; Insight · Decision Intelligence</div>
     <h1>You name the exposure. We hand back the decision.</h1>
     <p>A mineral, a route, a season, a policy shift about to land — one question in plain words, and a sourced, decision-ready brief comes back before it becomes the headline. Insight, never prediction.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">The architecture — 3 engines · 4 layers</div>
+    <div class="archgrid">
+      <div class="eng"><div class="en">EO</div><b>Satellite · the eyes</b><span>Earth-observation signal on the assets you depend on</span></div>
+      <div class="eng"><div class="en">AI</div><b>Consensus · the review</b><span>Several reasoning engines, disagreement kept honest</span></div>
+      <div class="eng"><div class="en">Intel</div><b>Corridor · the lens</b><span>25 years of Indo-Pacific context, not on any shelf</span></div>
+    </div>
+    <div class="layers">
+      <span class="ly">01 Sense</span><span class="la">→</span>
+      <span class="ly">02 Review</span><span class="la">→</span>
+      <span class="ly">03 Verify</span><span class="la">→</span>
+      <span class="ly">04 Deliver</span>
+    </div>
   </div></section>
 
   <section class="sec"><div class="wrap">
@@ -431,7 +477,7 @@
 <!-- ============ LINE TWO · RUN ============ -->
 <div class="view" id="run">
   <section class="vhero"><div class="wrap">
-    <div class="vk o">Line Two · AI Agents &amp; Automation</div>
+    <div class="vk o">Line Two · Agents &amp; Automation</div>
     <h1>Custom AI agents on your stack. Owned by you.</h1>
     <p>Not software you rent and learn — production-grade agents built on the systems you already run, doing the chasing your software won't: the quiet customer, the late invoice, the lead that lands after hours.</p>
   </div></section>
