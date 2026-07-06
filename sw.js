@@ -1,5 +1,5 @@
-const CACHE = 'apih-demo-v5';
-const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './voice-brief.mp3'];
+const CACHE = 'apih-demo-v7';
+const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './voice-brief.mp3', './APIH_Brief.pdf'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));

@@ -160,6 +160,39 @@
   .sendbtn.alt{background:#fff;color:var(--ink);border:1px solid var(--line);margin-top:9px;}
   .qnote{font-size:11.5px;color:var(--soft);margin-top:12px;line-height:1.55;}
 
+  .linecard{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;margin-bottom:14px;cursor:pointer;box-shadow:0 4px 18px rgba(29,43,51,.06);transition:transform .12s;}
+  .linecard:active{transform:scale(.985);}
+  .lc-head{color:#fff;padding:14px 18px;}
+  .lc-head .lc-n{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;opacity:.85;}
+  .lc-head h3{color:#fff;font-size:21px;margin-top:2px;}
+  .lc-body{padding:15px 18px 16px;}
+  .lc-body p{font-size:14px;color:#3a4a52;}
+  .lc-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px;}
+  .lc-foot b{font-size:13.5px;font-family:Georgia,serif;}
+  .lc-go{font-size:13px;font-weight:600;color:var(--mut);white-space:nowrap;}
+  .indchips{display:flex;flex-wrap:wrap;gap:9px;}
+  .indchips span{border:1px solid var(--line);background:#fff;border-radius:9px;padding:11px 14px;font-size:13.5px;font-weight:600;color:#2b3940;cursor:pointer;}
+  .indchips span:active{background:var(--panel);}
+
+  /* the brief document */
+  .docwrap{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 8px 30px rgba(29,43,51,.10);}
+  .dochead{background:var(--ink);color:#fff;padding:18px;}
+  .dochead .drow{display:flex;justify-content:space-between;gap:10px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#9fb0b8;}
+  .dochead .drow b{color:var(--gold);}
+  .dochead h3{color:#fff;font-size:19px;margin-top:9px;line-height:1.25;}
+  .docsec{padding:15px 18px;border-bottom:1px solid var(--line);}
+  .docsec:last-child{border-bottom:none;}
+  .docsec .dl{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:6px;}
+  .docsec p{font-size:14px;color:#2b3940;line-height:1.6;}
+  .docsec p b{font-family:Georgia,serif;}
+  .docsec ul{list-style:none;margin-top:4px;}
+  .docsec ul li{font-size:13.5px;color:#2b3940;padding:6px 0;border-bottom:1px dashed var(--line);display:flex;gap:9px;}
+  .docsec ul li:last-child{border-bottom:none;}
+  .docsec .dnum{font-family:Georgia,serif;font-weight:700;color:var(--teal);flex:none;}
+  .verdict{background:#f0f6f7;border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:13px 15px;margin-top:8px;}
+  .verdict .vl{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  .verdict p{font-family:Georgia,serif;font-size:15px;margin-top:4px;}
+
   .stackchips{display:flex;flex-wrap:wrap;gap:8px;}
   .stackchips span{border:1px solid var(--line);background:#fff;border-radius:7px;padding:7px 12px;font-size:12.5px;color:#3a4a52;font-weight:600;}
   .ratecard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;}
@@ -199,36 +232,57 @@
 <!-- ============ HUB ============ -->
 <div class="view active" id="hub">
   <section class="hub-hero"><div class="wrap">
-    <div class="kicker">Show, don't tell</div>
-    <h1>What we'd build <span class="o">for you.</span></h1>
-    <p>Pick your industry. See the exact deliverable you'd receive, the honest industry numbers behind it, and how the first move costs you nothing.</p>
+    <div class="kicker">APIH does two things</div>
+    <h1>We watch what moves you.<br>We run what drains <span class="o">you.</span></h1>
+    <p>One partner, two engines — decision intelligence on the outside forces, AI agents on the inside grind. Your first move costs nothing either way.</p>
     <div class="tagline">Seventy-two hours before the world reacts.</div>
   </div></section>
 
-  <section class="stakes"><div class="wrap">
-    <div class="stakegrid">
-      <div class="stake"><b>$1000s</b><span>lost yearly by the average AU SME to late payments alone</span></div>
-      <div class="stake"><b>10–15 hrs</b><span>per week of owner time going to admin a system could do</span></div>
-      <div class="stake"><b>$4.50 : $1</b><span>reported return per dollar on customer-watch automation</span></div>
+  <section class="vlist"><div class="wrap">
+    <div class="linecard" onclick="go('watch')">
+      <div class="lc-head" style="background:var(--teal);"><span class="lc-n">Line One</span><h3>Watch your exposure</h3></div>
+      <div class="lc-body">
+        <p>A mineral, a route, a season, a policy shift — name it, and a sourced decision brief comes back in 24–72 hours. Satellite signal, multi-engine review, 25 years of corridor knowledge.</p>
+        <div class="lc-foot"><b class="t">First insight free</b><span class="lc-go">See how it works ›</span></div>
+      </div>
     </div>
-    <div class="stakesrc">Third-party industry research (2025–26) — patterns, not our promises. Your result is scoped in the pilot.</div>
+    <div class="linecard" onclick="go('run')">
+      <div class="lc-head" style="background:var(--orange);"><span class="lc-n">Line Two</span><h3>Run your operations</h3></div>
+      <div class="lc-body">
+        <p>Custom AI agents on the systems you already run — invoices chased, reorders drafted, leads answered, quiet customers flagged. Owned by you, no lock-in.</p>
+        <div class="lc-foot"><b class="o">Pilot A$4,500 · fully refundable</b><span class="lc-go">Agents &amp; pricing ›</span></div>
+      </div>
+    </div>
+
+    <div class="startbox qcard" style="border-left-color:var(--gold);margin-top:4px;" onclick="go('brief')">
+      <div class="pk">Don't take our word — read one</div>
+      <h4>See a real brief &rarr;</h4>
+      <p>A full sample intelligence brief, exactly as it lands: the question, the read, the evidence, the recommended action. Two minutes.</p>
+    </div>
+
+    <a class="startbox qcard dlcard" style="border-left-color:var(--ink);display:block;" href="APIH_Brief.pdf" download="APIH_Services_and_Solutions.pdf">
+      <div class="pk">Take it with you · PDF</div>
+      <h4>Download the APIH brief &darr;</h4>
+      <p>The complete services &amp; solutions document — both lines, the model, the honesty terms. Read it on the train, forward it to a partner.</p>
+    </a>
   </div></section>
 
-  <section class="vlist"><div class="wrap">
-    <div class="lab">Choose your world</div>
-    <div class="vcard flag" onclick="go('pharm')"><div class="ic ph">⚕</div><div><span class="flagchip">Most requested</span><h3>Pharmacy &amp; Franchise</h3><p>20–100+ stores, one pair of eyes across all of them</p></div><div class="arr">›</div></div>
-    <div class="vcard" onclick="go('fuel')"><div class="ic fu">⛽</div><div><h3>Fuel &amp; Multi-Site</h3><p>Price right across every site. See the shock coming.</p></div><div class="arr">›</div></div>
-    <div class="vcard" onclick="go('mine')"><div class="ic mi">⛏</div><div><h3>Mining &amp; Resources</h3><p>The shift happens offshore — know before it lands</p></div><div class="arr">›</div></div>
-    <div class="vcard" onclick="go('agri')"><div class="ic ag">🌾</div><div><h3>Agriculture at Scale</h3><p>The season from orbit, the paperwork automated</p></div><div class="arr">›</div></div>
-    <div class="vcard" onclick="go('prop')"><div class="ic re">⌂</div><div><h3>Property &amp; Mortgage</h3><p>Every lead answered. Every deal moved forward.</p></div><div class="arr">›</div></div>
-    <div class="vcard" onclick="go('yours')"><div class="ic yo">✳</div><div><h3>Something else?</h3><p>Name the headache — the model fits any real operation</p></div><div class="arr">›</div></div>
+  <section class="sec"><div class="wrap">
+    <div class="lab">Built for your industry</div>
+    <div class="indchips">
+      <span onclick="go('pharm')">⚕ Pharmacy &amp; Franchise</span>
+      <span onclick="go('fuel')">⛽ Fuel &amp; Multi-Site</span>
+      <span onclick="go('mine')">⛏ Mining &amp; Resources</span>
+      <span onclick="go('agri')">🌾 Agriculture</span>
+      <span onclick="go('prop')">⌂ Property &amp; Mortgage</span>
+      <span onclick="go('yours')">✳ Something else</span>
+    </div>
   </div></section>
 
   <section class="startgrid"><div class="wrap">
     <div class="startbox">
       <div class="pk">Hear it · two minutes</div>
       <h4>The voice brief.</h4>
-      <p>What we do and why the first move costs nothing — in plain words, for the drive between meetings.</p>
       <div class="player">
         <button class="playbtn" id="playbtn" onclick="togglePlay()" aria-label="Play voice brief">▶</button>
         <div class="ptrack" onclick="seek(event)"><div class="pfill" id="pfill"></div></div>
@@ -237,35 +291,216 @@
       <audio id="vb" src="voice-brief.mp3" preload="metadata"></audio>
     </div>
 
-    <div class="startbox">
-      <div class="pk">The path in — every number stated up front</div>
-      <h4>Free look. Refundable pilot. Then piece by piece.</h4>
-      <ul class="ladder">
-        <li><div class="ln">1</div><div><b>Free first move</b><span>Intelligence: one sourced brief in 24–48h, free. Automation: a workflow walkthrough at your premises — we tell you on the spot what's worth automating and what isn't.</span></div></li>
-        <li><div class="ln">2</div><div><b>Pilot — <span class="price">A$4,500, fully refundable</span></b><span>A first working result on your real data by day 10; your decision window runs to day 30. Refundable in full up to day 30 — the only binding commitment. Locked in writing.</span></div></li>
-        <li><div class="ln">3</div><div><b>Build — paid on delivery, owned by you</b><span>Pick the agents that matter. Each priced per piece, milestone-locked, yours to keep. Run-costs pass through at cost — never marked up. Clean break clause, always.</span></div></li>
-      </ul>
-    </div>
-
-    <div class="startbox qcard" style="border-left-color:var(--orange);" onclick="go('pricing')">
-      <div class="pk">Every number, up front</div>
-      <h4>Pricing &amp; straight answers &rarr;</h4>
-      <p>What it costs all-in, how the refund works, who owns what, and what happens if it breaks &mdash; the questions owners actually ask.</p>
-    </div>
-
-    <div class="startbox qcard" style="border-left-color:var(--gold);" onclick="go('brief')">
-      <div class="pk">The complete picture · 3-minute read</div>
-      <h4>The full brief →</h4>
-      <p>Both lines, how it works end-to-end, the agent menu, and the three-stage model — everything on one page.</p>
-    </div>
-
     <div class="startbox qcard" onclick="go('discover')">
       <div class="pk">15 minutes, on your phone</div>
-      <h4>Tell us where it hurts →</h4>
-      <p>A short discovery form — answer what fits, skip what doesn't. It lands straight with Harry on WhatsApp, held in confidence under NDA.</p>
+      <h4>Tell us where it hurts &rarr;</h4>
+      <p>A short discovery form — it lands straight with Harry on WhatsApp, held in confidence under NDA.</p>
+    </div>
+
+    <div class="offer">
+      <div class="n">One conversation decides</div>
+      <h4>Tell Harry the headache, in plain words.</h4>
+      <p>Free first brief if it's the outside world; refundable pilot if it's the inside grind. You owe nothing until you've seen the value yourself.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
     </div>
   </div></section>
 </div>
+
+<!-- ============ LINE ONE · WATCH ============ -->
+<div class="view" id="watch">
+  <section class="vhero"><div class="wrap">
+    <div class="vk t">Line One · Decision Intelligence</div>
+    <h1>You name the exposure. We hand back the decision.</h1>
+    <p>A mineral, a route, a season, a policy shift about to land — one question in plain words, and a sourced, decision-ready brief comes back before it becomes the headline. Insight, never prediction.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">Three engines, fused into one answer</div>
+    <ul class="feat">
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>The eyes — satellite.</b> Commercial earth-observation signal on the assets you depend on: your sites, your suppliers', your routes. Surface indicators, read for what they mean.</span></li>
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>The review — multi-engine.</b> Your question run across several independent AI reasoning engines, with disagreement kept honest. Consensus you can trust, not one opinion.</span></li>
+      <li><span class="dot" style="background:var(--teal)"></span><span><b>The lens — corridor.</b> 25 years of Indo-Pacific corridor knowledge — offtake, export controls, chokepoints. The context that can't be bought off a shelf.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">How it works — no software to learn</div>
+    <div class="patterns">
+      <div class="pk">One question in · one brief back</div>
+      <div class="prow"><b>01 Name it</b><span>One exposure, plain words. Three lines is enough.</span></div>
+      <div class="prow"><b>02 Review</b><span>Satellite, multi-engine review and corridor context pulled into one read.</span></div>
+      <div class="prow"><b>03 Verify</b><span>Cross-checked against primary sources before anything goes out.</span></div>
+      <div class="prow"><b>04 Deliver</b><span>A short, sourced, plain-English brief with a calibrated confidence.</span></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">Don't take our word — read one</div>
+    <div class="startbox qcard" style="border-left-color:var(--gold);" onclick="go('brief')">
+      <div class="pk">Sample · two-minute read</div>
+      <h4>Open the sample brief &rarr;</h4>
+      <p>The full document, exactly as it lands — question, read, evidence, recommended action, confidence.</p>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">The entry ladder — risk stays on us until value is in the room</div>
+    <div class="ratecard">
+      <div class="rrow hd"><div class="rl"><b>First insight</b><span>One question, one sourced answer — judge the value yourself</span></div><div class="rp">Free</div></div>
+      <div class="rrow"><div class="rl"><b>Corridor question</b><span>One exposure — mineral, route, policy, counterparty. Multi-engine read inside 72 hours</span></div><div class="rp">Scoped</div></div>
+      <div class="rrow"><div class="rl"><b>Site baseline audit</b><span>One named asset — satellite baseline + structural read + the corridor context layer</span></div><div class="rp">Scoped</div></div>
+      <div class="rrow"><div class="rl"><b>Continuous watch</b><span>Monthly change-detection brief + alert trigger on your audited asset</span></div><div class="rp">Scoped</div></div>
+    </div>
+    <div class="pnote" style="margin-top:10px;">Paid rungs are scoped and priced per engagement, in writing, before any commitment — after you've judged the free first insight.</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">The first move — free</div>
+      <h4>Name your sharpest exposure. First brief is on us.</h4>
+      <p>Whatever would hurt most — a supplier, a season, a policy shift, a corridor. One sourced answer back, free, before anything else.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ THE SAMPLE BRIEF ============ -->
+<div class="view" id="brief">
+  <section class="vhero"><div class="wrap">
+    <div class="vk g">The Deliverable · Read One Before You Buy One</div>
+    <h1>A brief, exactly as it lands.</h1>
+    <p>Reference case, real event: the June 2026 fire at one of Australia's two remaining refineries — used here to illustrate methodology only. No client brief was issued before this event; this shows what the engine is built to see.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="docwrap">
+      <div class="dochead">
+        <div class="drow"><span>Decision Brief · <b>Sample — Reference Case</b></span><span class="today"></span></div>
+        <h3>Structural stress at a fuel-critical facility — what ground sensors could not see.</h3>
+        <div class="drow" style="margin-top:9px;"><span>Classification: Client Confidential</span><span>Delivered: SMS alert + signed PDF</span></div>
+      </div>
+
+      <div class="docsec"><div class="dl">The question</div>
+        <p>"We depend on a single refinery for regional fuel supply. Is there any early structural signal on the facility we should know about before it reaches the news?"</p>
+      </div>
+
+      <div class="docsec"><div class="dl">Why ground telemetry misses it</div>
+        <p>Refineries rely on point-source sensors — gas sniffers, pressure gauges, control-room telemetry — each reading one location. As a process unit drifts toward failure, stress first shows at <b>facility scale</b>: millimetric ground deformation and a persistent thermal shift across the unit's footprint — often before point sensors localise the cause.</p>
+      </div>
+
+      <div class="docsec"><div class="dl">The evidence — from orbit</div>
+        <ul>
+          <li><span class="dnum">SAR</span><span>Radar interferometry penetrates dust, cloud, darkness — reads ground and structural deformation to 3–5&nbsp;mm against a 6–12 month baseline.</span></li>
+          <li><span class="dnum">LWIR</span><span>Thermal imaging flags persistent heat anomalies at unit footprint scale — zones, not single components.</span></li>
+          <li><span class="dnum">Δ</span><span>Change-detection logic isolates genuine structural deviation from weather noise; human-in-the-loop triage validates before anything is sent.</span></li>
+        </ul>
+      </div>
+
+      <div class="docsec"><div class="dl">The read — as it would have appeared</div>
+        <div class="verdict"><div class="vl">Alert · High Priority</div>
+        <p>"Ground deformation 6&nbsp;mm + thermal drift across Crude Unit Zone B footprint · persistent 72-hour shift vs baseline. Recommended action: inspect within operational shift."</p></div>
+        <p style="margin-top:10px;">In the real June 2026 event, a pressure drop was detected on control boards only moments before the fire. The 13-hour blaze cost roughly 150 million litres of diesel — from a facility producing ~10% of national fuel.</p>
+      </div>
+
+      <div class="docsec"><div class="dl">What you'd watch next</div>
+        <p>Three named indicators, checked on cadence — the early tells that the read is strengthening or fading — plus which of your sites and contracts feel a supply gap first.</p>
+      </div>
+
+      <div class="docsec"><div class="dl">Confidence &amp; sourcing</div>
+        <p><span class="conf">Calibrated confidence stated on every brief</span></p>
+        <p style="margin-top:8px;">Every brief carries its sources and a confidence level. Insight, never prediction — surface indicators read for what they mean, never a guarantee.</p>
+      </div>
+    </div>
+    <div class="pnote" style="margin-top:12px;">Reference case for methodology illustration only, based on publicly reported events. No client brief was published prior to the incident. Satellite surfaces surface indicators; it does not assay ore, find deposits, or diagnose crops directly.</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">Your first one is free</div>
+      <h4>Name the asset. Get the read.</h4>
+      <p>One question, three lines, plain words. A sourced brief back in 24–72 hours — free, so you can judge this against your own reality.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="APIH_Brief.pdf" download="APIH_Services_and_Solutions.pdf">Download the full APIH brief (PDF)</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ LINE TWO · RUN ============ -->
+<div class="view" id="run">
+  <section class="vhero"><div class="wrap">
+    <div class="vk o">Line Two · AI Agents &amp; Automation</div>
+    <h1>Custom AI agents on your stack. Owned by you.</h1>
+    <p>Not software you rent and learn — production-grade agents built on the systems you already run, doing the chasing your software won't: the quiet customer, the late invoice, the lead that lands after hours.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">The agent menu — you pick, we tune to your data</div>
+    <ul class="feat">
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Customer watch</b> — flags customers whose ordering has gone quiet, before they leave</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Reorder &amp; supply</b> — ordering automated against real sales, on the right date, every time</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Cash-flow watch</b> — intelligent invoice chasing, crunches flagged 30 days out</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Lead capture &amp; routing</b> — no enquiry missed, follow-up on time, every time</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Pipeline intelligence</b> — slipping deals flagged, patterns surfaced</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>Pricing &amp; site ops</b> — accurate, responsive pricing across many sites, against your rules</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>System integration</b> — your existing tools connected, so staff stop re-keying</span></li>
+      <li><span class="dot" style="background:var(--orange)"></span><span><b>AI visibility</b> — read correctly by AI search; email that lands in the inbox, not spam</span></li>
+    </ul>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">Built on the systems you already pay for</div>
+    <div class="stackchips">
+      <span>Xero</span><span>MYOB</span><span>Cliniko</span><span>ServiceM8</span><span>simPRO</span><span>Salesforce</span><span>HubSpot</span><span>Shopify</span><span>LEAP</span><span>Power Diary</span><span>Your POS</span><span>Custom systems</span>
+    </div>
+    <div class="pnote" style="margin-top:10px;">We never replace your tools — we add the brain on top.</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">What the industry numbers say</div>
+    <div class="patterns">
+      <div class="pk">Third-party results in comparable businesses — not our clients</div>
+      <div class="prow"><b>21–28 → 7–10</b><span>days: payment cycles compressed by intelligent invoice chasing</span></div>
+      <div class="prow"><b>−75%</b><span>invoice processing time, with up to 90% fewer manual entry errors</span></div>
+      <div class="prow"><b>998 hrs/yr</b><span>saved by one Australian practice automating routine workflows</span></div>
+      <div class="pnote">Published Australian and global case studies (2025–26). The ceiling, not a promise — your Year-1 result is scoped honestly in the pilot.</div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">The rate card — every number up front</div>
+    <div class="ratecard">
+      <div class="rrow hd"><div class="rl"><b>Stage 0 · Pilot</b><span>First working result by day 10 · your decision window to day 30</span></div><div class="rp">A$4,500 · refundable</div></div>
+      <div class="rrow"><div class="rl"><b>Agents · per piece</b><span>Milestone-locked — if an agent isn't delivered, you don't pay for it</span></div><div class="rp">A$3,000 each</div></div>
+      <div class="rrow"><div class="rl"><b>Ongoing · full</b><span>Continuous tuning, quarterly strategy review, model swaps when new AI ships</span></div><div class="rp">A$3,500 / mo</div></div>
+      <div class="rrow"><div class="rl"><b>Ongoing · lite</b><span>Reduced scope agreed at signing · same 3-month break clause</span></div><div class="rp">A$1,750 / mo</div></div>
+    </div>
+    <div class="pnote" style="margin-top:10px;">All prices AUD incl GST. Run-costs (AI credits, hosting, third-party software) pass through at cost — never marked up. Scoped during the pilot, before any commitment beyond the refundable A$4,500.</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lab">The questions owners actually ask</div>
+    <details class="faq"><summary>If I stop, what do I keep?</summary><div class="fa">Everything built to that point. Agents are owned by you — code, configuration, strategy. Stop at the end of any stage and keep what's built. Clean break clause on the ongoing tier, always.</div></details>
+    <details class="faq"><summary>How does the refund actually work?</summary><div class="fa">The pilot is A$4,500, refundable in full up to day 30. A first working result lands by day 10; you then have until day 30 to decide — continue, or take every dollar back. The decision window is yours, in writing.</div></details>
+    <details class="faq"><summary>What do I pay monthly on top?</summary><div class="fa">Only the third-party run-costs your agents need — AI credits, hosting, software they connect to. At cost, never marked up, scoped during the pilot so there are no surprises.</div></details>
+    <details class="faq"><summary>What about my data and my customers?</summary><div class="fa">Held in strict confidence under mutual NDA. Agents run on your systems, on your accounts. Nothing leaves your control.</div></details>
+    <details class="faq"><summary>What if my staff won't use it?</summary><div class="fa">Agents are built around how your team already works — same tools, same screens, nothing new to learn. If the team can't live with it by day 30, refund.</div></details>
+    <details class="faq"><summary>Is any result guaranteed?</summary><div class="fa">No — and be wary of anyone who says yes. The only contractual commitment is the refundable pilot. Your Year-1 result depends on your data, systems and team, scoped honestly during the pilot.</div></details>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="offer">
+      <div class="n">The first move — risk on us</div>
+      <h4>A refundable pilot on your real data.</h4>
+      <p>Specific beats general — "I lose four hours every Friday on invoicing" beats "I want to use AI more." Tell Harry the headache; you'll get a straight answer on whether it's a fit.</p>
+      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
+      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
+    </div>
+  </div></section>
+</div>
+
 
 <!-- ============ PHARMACY — FLAGSHIP ============ -->
 <div class="view" id="pharm">
@@ -505,119 +740,6 @@
       <p>Free first insight if it's intelligence; a fully refundable pilot if it's automation. You owe nothing until you've seen the value yourself.</p>
       <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
       <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
-    </div>
-  </div></section>
-</div>
-
-<!-- ============ THE FULL BRIEF ============ -->
-<div class="view" id="brief">
-  <section class="vhero"><div class="wrap">
-    <div class="vk g">Services &amp; Solutions · The Complete Picture</div>
-    <h1>Two ways APIH buys back your edge and your time.</h1>
-    <p>We watch the exposures that move your position — minerals, seasons, fuel, supply — and hand back a decision before it becomes the headline. And we automate the operations that eat your week, so the business runs without living in your inbox. One partner, two lines, built around you.</p>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="lab">The two pains, in owners' own words</div>
-    <ul class="feat">
-      <li><span class="dot" style="background:var(--teal)"></span><span><b>The exposure problem</b> — "too much data, not enough decision." Feeds and dashboards everywhere, and still no clear answer when something moves. By the time it's in the news, it has already cost you.</span></li>
-      <li><span class="dot" style="background:var(--orange)"></span><span><b>The operations problem</b> — "if I take two weeks off, the whole thing stalls." Hours lost to admin a system could do; invoices chased by hand; customers quietly drifting away.</span></li>
-    </ul>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="lab">Line one · Intelligence — how it works</div>
-    <div class="patterns">
-      <div class="pk">No software to learn · one question in, one brief back</div>
-      <div class="prow"><b>01 Name it</b><span>One exposure, in plain words. Three lines is enough.</span></div>
-      <div class="prow"><b>02 Review</b><span>Satellite signal, several independent reasoning engines, and 25 years of corridor knowledge — pulled into one read.</span></div>
-      <div class="prow"><b>03 Verify</b><span>Cross-checked against primary sources before anything goes out.</span></div>
-      <div class="prow"><b>04 Deliver</b><span>A short, sourced, plain-English brief with a calibrated confidence — in 24–48 hours.</span></div>
-      <div class="pnote">Consultancies take weeks and price like it. One named exposure becomes a decision-ready answer inside two working days. Insight, never prediction.</div>
-    </div>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="lab">Line two · Automation — the agent menu</div>
-    <ul class="feat">
-      <li><span class="dot" style="background:var(--orange)"></span><span><b>Customer watch</b> — flags customers whose ordering has gone quiet, before they leave</span></li>
-      <li><span class="dot" style="background:var(--orange)"></span><span><b>Reorder &amp; supply</b> — ordering automated against real sales, on the right date, every time</span></li>
-      <li><span class="dot" style="background:var(--orange)"></span><span><b>Cash-flow watch</b> — intelligent invoice chasing, crunches flagged early</span></li>
-      <li><span class="dot" style="background:var(--orange)"></span><span><b>Lead capture &amp; routing</b> — no enquiry missed, follow-up on time, every time</span></li>
-      <li><span class="dot" style="background:var(--orange)"></span><span><b>Pipeline intelligence</b> — slipping deals flagged, patterns surfaced</span></li>
-      <li><span class="dot" style="background:var(--orange)"></span><span><b>Pricing &amp; site ops</b> — accurate, responsive pricing across many sites, against your rules</span></li>
-      <li><span class="dot" style="background:var(--orange)"></span><span><b>System integration</b> — the tools you already run, connected, so staff stop re-keying</span></li>
-      <li><span class="dot" style="background:var(--orange)"></span><span><b>AI visibility</b> — read correctly by AI search; email that lands in the inbox, not spam</span></li>
-    </ul>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="lab">Built on the systems you already pay for</div>
-    <div class="stackchips">
-      <span>Xero</span><span>MYOB</span><span>Cliniko</span><span>ServiceM8</span><span>simPRO</span><span>Salesforce</span><span>HubSpot</span><span>Shopify</span><span>LEAP</span><span>Power Diary</span><span>Your POS</span><span>Custom systems</span>
-    </div>
-    <div class="pnote" style="margin-top:10px;">We never replace your tools &mdash; we add the brain on top. Agents read from and write back to your existing stack.</div>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="lab">The model — risk on us, not you</div>
-    <div class="patterns">
-      <div class="pk">No upfront lump sums · stop at any stage and keep what's built</div>
-      <div class="prow"><b>Stage 0</b><span><b>Pilot — fully refundable.</b> We shadow your business and put a first working result live on your real data. The only binding commitment.</span></div>
-      <div class="prow"><b>Stage 1</b><span><b>Build — paid on delivery.</b> Pick the agents your business needs; each milestone-locked, integrated with your tools, owned by you.</span></div>
-      <div class="prow"><b>Stage 2</b><span><b>Ongoing — tuned &amp; watched.</b> A fractional operations brain, month to month, with a clean break clause.</span></div>
-      <div class="pnote">No client outcomes or ROI are guaranteed. Monthly run-costs (software / AI credits) pass through at cost — never marked up. Scope is set during the pilot, around your data and your team.</div>
-    </div>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="offer">
-      <div class="n">Start here · one conversation, both lines</div>
-      <h4>Start with one thing. Free or refundable.</h4>
-      <p>If it's intelligence — name your sharpest exposure, one sourced answer comes back free. If it's automation — a fully refundable pilot, risk on us. One conversation with Harry decides where you begin.</p>
-      <a class="btn" href="tel:+61405179440">Call Harry · +61 405 179 440</a>
-      <a class="btn2" href="https://wa.me/61405179440">WhatsApp — fastest path</a>
-    </div>
-  </div></section>
-</div>
-
-<!-- ============ PRICING & FAQ ============ -->
-<div class="view" id="pricing">
-  <section class="vhero"><div class="wrap">
-    <div class="vk o">Pricing &amp; Straight Answers</div>
-    <h1>Every number public. No upgrade traps.</h1>
-    <p>What it costs, how the refund works, and the questions owners actually ask &mdash; answered before you have to ask them. All prices in AUD, including GST. Final scope is set jointly during the pilot, around your business.</p>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="lab">The rate card &mdash; automation line</div>
-    <div class="ratecard">
-      <div class="rrow hd"><div class="rl"><b>Stage 0 &middot; Pilot</b><span>First working result by day 10 &middot; your decision window to day 30</span></div><div class="rp">A$4,500 &middot; refundable</div></div>
-      <div class="rrow"><div class="rl"><b>Agents &middot; per piece</b><span>Milestone-locked &mdash; if an agent isn't delivered, you don't pay for it</span></div><div class="rp">A$3,000 each</div></div>
-      <div class="rrow"><div class="rl"><b>Ongoing &middot; full</b><span>Continuous tuning, quarterly strategy review, model swaps when new AI ships</span></div><div class="rp">A$3,500 / mo</div></div>
-      <div class="rrow"><div class="rl"><b>Ongoing &middot; lite</b><span>Reduced scope agreed at signing &middot; same 3-month break clause</span></div><div class="rp">A$1,750 / mo</div></div>
-      <div class="rrow"><div class="rl"><b>Intelligence briefs</b><span>First insight free &middot; ongoing coverage scoped per engagement</span></div><div class="rp">First one free</div></div>
-    </div>
-    <div class="pnote" style="margin-top:10px;">Monthly run-costs (AI credits, hosting, third-party software your agents use) pass through to you at cost &mdash; never marked up. Scoped and quoted during the pilot, before any commitment beyond the refundable A$4,500.</div>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="lab">The questions owners actually ask</div>
-    <details class="faq"><summary>If I stop, what do I keep?</summary><div class="fa">Everything built to that point. Agents are owned by you &mdash; code, configuration, strategy. Stop at the end of any stage and keep what's built. Clean break clause on the ongoing tier, always.</div></details>
-    <details class="faq"><summary>How does the refund actually work?</summary><div class="fa">The pilot is A$4,500, refundable in full up to day 30. A first working result lands by day 10; you then have until day 30 to decide &mdash; continue, or take every dollar back. The decision window is yours, in writing.</div></details>
-    <details class="faq"><summary>What do I pay monthly on top?</summary><div class="fa">Only the third-party run-costs your agents need &mdash; AI credits, hosting, software subscriptions they connect to. These hit your accounts directly at cost, never marked up. An indicative figure is scoped during the pilot so there are no surprises.</div></details>
-    <details class="faq"><summary>What about my data and my customers?</summary><div class="fa">Held in strict confidence under mutual NDA &mdash; your customers, suppliers, numbers and network stay between us. Agents run on your systems, on your accounts. Nothing leaves your control.</div></details>
-    <details class="faq"><summary>What if my staff won't use it?</summary><div class="fa">Agents are built around how your team already works &mdash; same tools, same screens, nothing new to learn. Adoption is designed in during the pilot, on your real workflows, with your real people. If the team can't live with it by day 30, refund.</div></details>
-    <details class="faq"><summary>Is any result guaranteed?</summary><div class="fa">No &mdash; and be wary of anyone who says yes. The only contractual commitment is the refundable pilot. Industry case studies show what's been achieved in comparable businesses; your Year-1 result depends on your data, your systems and your team, and is scoped honestly during the pilot.</div></details>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="offer">
-      <div class="n">Still simplest</div>
-      <h4>One conversation. Tell Harry the headache.</h4>
-      <p>Specific beats general &mdash; "I lose four hours every Friday on invoicing" beats "I want to use AI more." You'll get a straight answer on whether it's a fit, and at least one idea you can use either way.</p>
-      <a class="btn" href="tel:+61405179440">Call Harry &middot; +61 405 179 440</a>
-      <a class="btn2" href="https://wa.me/61405179440">WhatsApp &mdash; fastest path</a>
     </div>
   </div></section>
 </div>
