@@ -227,6 +227,13 @@
   details.faq summary::after{content:'+';font-family:Georgia,serif;font-size:19px;color:var(--orange);flex:none;}
   details.faq[open] summary::after{content:'\2212';}
   details.faq .fa{padding:0 16px 15px;font-size:13.5px;color:#45535b;line-height:1.6;}
+  .tabbar{position:fixed;bottom:0;left:0;right:0;z-index:60;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);}
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px 8px;border:none;background:none;cursor:pointer;font-family:inherit;color:var(--mut);}
+  .tab .ti{font-size:18px;line-height:1;}
+  .tab .tl{font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;}
+  .tab.on{color:var(--orange);}
+  .tab.on .tl{color:var(--orange);}
+  body{padding-bottom:64px;}
   footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:11px;color:var(--mut);line-height:1.6;}
   footer .ftag{font-family:Georgia,serif;font-style:italic;color:var(--orange);font-size:13px;margin-bottom:10px;}
 
@@ -868,11 +875,26 @@
   All sample deliverables and industry figures on this page are illustrative or drawn from third-party published research — they are not APIH client results, outcomes or guarantees. Intelligence is insight, never prediction — sourced and calibrated, never a guarantee. Earth observation surfaces surface indicators; it does not assay ore, find deposits, or diagnose crops directly. Automation runs on a fully refundable pilot — the only binding commitment; no ROI is guaranteed and run-costs pass through at cost. APIH provides research, educational and business-automation services only — not financial product, credit or legal advice; nothing here considers your objectives, financial situation or needs. Seek independent licensed advice before any financial decision. Delivered in partnership with a specialist Australian intelligence &amp; automation provider. © 2026 APIH · Australian Property &amp; Investment Hub · Sydney NSW · Harry Singh, Principal · +61&nbsp;405&nbsp;179&nbsp;440
 </div></footer>
 
+<nav class="tabbar" aria-label="Main">
+  <button class="tab on" data-v="hub" onclick="go('hub')"><span class="ti">⌂</span><span class="tl">Home</span></button>
+  <button class="tab" data-v="watch" onclick="go('watch')"><span class="ti">◉</span><span class="tl">Intelligence</span></button>
+  <button class="tab" data-v="run" onclick="go('run')"><span class="ti">⚙</span><span class="tl">Automation</span></button>
+  <button class="tab" data-v="brief" onclick="go('brief')"><span class="ti">▤</span><span class="tl">Brief</span></button>
+  <button class="tab" data-v="discover" onclick="go('discover')"><span class="ti">✎</span><span class="tl">Start</span></button>
+</nav>
+
 <script>
+const TABVIEWS = {hub:'hub', watch:'watch', run:'run', brief:'brief', discover:'discover',
+  pharm:'hub', fuel:'hub', mine:'hub', agri:'hub', prop:'hub', yours:'hub'};
+function setTab(id){
+  const t = TABVIEWS[id] || 'hub';
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on', b.dataset.v===t));
+}
 function go(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.body.classList.toggle('inview', id!=='hub');
+  setTab(id);
   window.scrollTo({top:0,behavior:'instant'});
   if(history.pushState) history.pushState({v:id}, '', '#'+id);
 }
@@ -882,6 +904,7 @@ window.addEventListener('popstate', e=>{
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   (el||document.getElementById('hub')).classList.add('active');
   document.body.classList.toggle('inview', id!=='hub' && !!el);
+  setTab(id);
 });
 if(location.hash && document.getElementById(location.hash.slice(1))) go(location.hash.slice(1));
 

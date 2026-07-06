@@ -1,4 +1,4 @@
-const CACHE = 'apih-demo-v8';
+const CACHE = 'apih-demo-v9';
 const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './voice-brief.mp3', './APIH_Brief.pdf'];
 
 self.addEventListener('install', e => {
